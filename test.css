@@ -1,0 +1,27 @@
+body{
+  margin:0;
+  padding:0;
+  background-color:#BAAEAE;
+}
+
+#header{
+  margin:0;
+  padding:0;
+  display:flex;
+  min-height:100px;
+  background:linear-gradient(135deg, #29abe2 50%, #ffffff 50%);
+}
+
+#headerC{
+  display:flex;
+  min-height: 10px;
+  min-width:50px;
+  margin:auto;
+  background-color: yellow;
+  justify-content: center;
+}
+
+#headerCT{
+  text-align: center;
+  font-size:60px;
+}

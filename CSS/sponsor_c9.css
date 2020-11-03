@@ -13,10 +13,10 @@ p{
 
 /* Main Header */
 
-#header{
+/* #header{
   margin: 0;
   padding: 10px;
-  background-color:#CCCCCC;
+  background:linear-gradient(135deg, #29abe2 50%, #ffffff 50%);
 }
 
 #headerContent{
@@ -24,9 +24,32 @@ p{
   max-width:30%;
   min-height:50px;
   margin: 0 auto 0;
+  background:linear-gradient(45deg, #29abe2 50%, #ffffff 50%);
+  border-radius: 10px 15px 10px 15px;
   font-size: 40px;
+} */
+
+#header{
+  margin:0;
+  padding:0;
+  display:flex;
+  min-height:150px;
+  background:linear-gradient(135deg, #29abe2 50%, #ffffff 50%);
 }
 
+#headerC{
+  display:flex;
+  min-height: 50px;
+  min-width:50px;
+  margin:auto;
+  background:linear-gradient(45deg, #29abe2 50%, #ffffff 50%);
+  justify-content: center;
+}
+
+#headerCT{
+  text-align: center;
+  font-size:100px;
+}
 
 /* Game Header */
 
@@ -50,17 +73,4 @@ p{
   background-color:#FDFDFD;
   margin: 0 auto 0;
   font-size:37px;
-}
-
-/* Media Query */
-
-@media screen and (max-width: 1000px){
-
-/* Game Header */
-
-#headerr{
-  font-size: 45px;
-}
-
-
 }
