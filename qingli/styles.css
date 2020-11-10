@@ -1,0 +1,128 @@
+.part{
+    height: 500px;
+    width: 550px;
+}
+.categories {
+    display: flex;
+    justify-content: space-evenly;
+    width: 240px;
+}
+
+header nav {
+    align-items: center;
+    background-color: #2B303A;
+    display: flex;
+    font-family: "DejaVu Sans Mono", sans-serif;
+    justify-content: space-between;
+}
+
+
+
+/* unvisited link */
+header nav a:link {
+    color: #E8E8E8;
+}
+
+/* visited link */
+header nav a:visited {
+    color: #E8E8E8;
+}
+
+/* mouse over link */
+header nav a:hover {
+    color: #E8E8E8;
+}
+
+/* selected link */
+header nav a:active {
+    color: #E8E8E8;
+}
+
+header nav img {
+    filter: invert(67%) sepia(96%) saturate(1327%) hue-rotate(349deg) brightness(102%) contrast(96%);
+    justify-self: flex-start;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100px;
+}
+.intro{
+    background-color: #2E6E3B;
+
+}
+
+div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* align */
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
+/* header */
+h1{
+    color: #7f851d
+}
+
+/* image */
+img.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    width: 80px;
+}
+
+/* table */
+table{
+    border:none;
+    background-color: #d5dce8;
+}
+
+td.left{
+    color:blue;
+    padding-right:4em;
+}
+
+td.right{
+    padding-right:4em;
+}
+
+/* Equal Height */
+.col-container {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.col {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+    main .searchBar {
+        width: 300px;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    main .searchBar {
+        width: 400px;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    main .searchBar {
+        width: 500px;
+    }
+
+    main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 962px;
+    }
+}
