@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    font-family: "Fira Code", sans-serif;
+}
+
+article h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+article img {
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+}
+
+article p {
+    text-align: justify;
+}
+
+body {
+    background-color: #E8E8E8;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-evenly;
+    width: 240px;
+}
+
+header nav {
+    align-items: center;
+    background-color: #2B303A;
+    display: flex;
+    font-family: "DejaVu Sans Mono", sans-serif;
+    justify-content: space-between;
+}
+
+header nav a {
+    text-decoration: none;
+}
+
+/* unvisited link */
+header nav a:link {
+    color: #E8E8E8;
+}
+
+/* visited link */
+header nav a:visited {
+    color: #E8E8E8;
+}
+
+/* mouse over link */
+header nav a:hover {
+    color: #E8E8E8;
+}
+
+/* selected link */
+header nav a:active {
+    color: #E8E8E8;
+}
+
+header nav img {
+    filter: invert(67%) sepia(96%) saturate(1327%) hue-rotate(349deg) brightness(102%) contrast(96%);
+    justify-self: flex-start;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    color: #2B303A;
+    font-family: "Fira Code", sans-serif;
+    font-size: 2em;
+    text-align: center;
+    padding: 60px;
+}
+
+.searchBar {
+    margin: 0 auto;
+    padding: 12px 20px;
+    width: 60%;
+}
+
+.searchButton {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 12px 20px;
+    width: 80%;
+}
+
+main button {
+    border: 1px solid gray;
+    border-radius: 6px;
+    font-family: "Fira Code", sans-serif;
+    font-size: 18px;
+    padding: 12px 20px;
+}
+
+main button:hover {
+    box-shadow: 0 0 4px 1px #888888;
+}
+
+main input {
+    border: 1px solid gray;
+    border-radius: 6px;
+    font-size: 24px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+main input:hover {
+    box-shadow: 0 0 4px 1px #888888;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+    main .searchBar {
+        width: 300px;
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    main .searchBar {
+        width: 400px;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    main .searchBar {
+        width: 500px;
+    }
+
+    main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 962px;
+    }
+}

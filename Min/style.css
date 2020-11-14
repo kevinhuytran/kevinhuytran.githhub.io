@@ -1,0 +1,54 @@
+.intro{
+    background-color: #2E6E3B;
+
+}
+
+div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* align */
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+/* header */
+h1{
+    color: #7f851d
+}
+
+/* image */
+img.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    width: 80px;
+}
+
+/* table */
+table{
+    border:none;
+    background-color: #d5dce8;
+}
+
+td.left{
+    color:blue;
+    padding-right:4em;
+}
+
+td.right{
+    padding-right:4em;
+}
+
+/* Equal Height */
+.col-container {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.col {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+}
