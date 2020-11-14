@@ -18,7 +18,7 @@ echo "Here is the following:<br>";
 
 $playerInGame = $_POST["playerInGame"];
 $playerName = $_POST["playerName"];
-$playerDesc = $_POST["playerDescription"];
+$playerDesc = nl2br($_POST["playerDescription"]);
 $playerSettings = $_POST["playerSettings"];
 $playerLink = $_POST["playerLink"];
 $playerImage = $_POST["playerImage"];

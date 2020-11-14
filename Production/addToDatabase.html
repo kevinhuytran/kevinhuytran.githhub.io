@@ -13,7 +13,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -26,7 +25,7 @@
         </div>
     </nav>
 </header>
-<main>
+<main class="container-md">
     <h1>Submit a Player Profile!</h1>
     <form action="addToDatabase.php" method="post">
         <div class="form-group">
@@ -39,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="playerDescription">Description</label>
-            <textarea class="form-control" id="playerDescription" rows="5" name="playerDescription"></textarea>
+            <textarea class="form-control" id="playerDescription" rows="5" name="playerDescription" style="white-space: pre-line;"></textarea>
         </div>
         <div class="form-group">
             <label for="playerSettings">Settings</label>
