@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Esport Encyclopedia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style>
+        header {
+            font-family: "DejaVu Sans Mono", sans-serif;
+        }
+    </style>
+    <script src="gameIndexFormValidation.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-5" style="background-color: #2B303A;">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Games</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Players</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Teams</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container-md">
+    <h1>Submit a Game Profile!</h1>
+    <form action="gameAddToDatabase.php" method="post" onsubmit="return validateForm(document.getElementById('gameTitle'),
+    document.getElementById('gameDescription'),document.getElementById('gameLink'),document.getElementById('gameImage'),document.getElementById('gameTags'))">
+        <div class="form-group">
+            <label for="gameTitle">Game Title</label>
+            <input type="text" class="form-control" id="gameTitle" name="gameTitle">
+        </div>
+        <div class="form-group">
+            <label for="gameDescription">Description</label>
+            <textarea class="form-control" id="gameDescription" rows="5" name="gameDescription" style="white-space: pre-line;"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="gameLink">Link</label>
+            <input type="text" class="form-control" id="gameLink" name="gameLink">
+        </div>
+        <div class="form-group">
+            <label for="gameImage">Image</label>
+            <input type="text" class="form-control" id="gameImage" name="gameImage">
+        </div>
+        <div class="form-group">
+            <label for="gameTags">Tags</label>
+            <input type="text" class="form-control" id="gameTags" name="gameTags">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</main>
+</body>
+</html>
