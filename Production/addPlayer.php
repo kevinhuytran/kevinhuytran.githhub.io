@@ -1,8 +1,10 @@
 <?php
 include("connect.php");
 
-echo "We have received your input!<br>";
-echo "Here is the following:<br>";
+if(isset($_POST["submit"])) {
+    echo "We have received your input!<br>";
+    echo "Here is the following:<br>";
+}
 
 $playerInGame = $_POST["playerInGame"];
 $playerName = $_POST["playerName"];
@@ -34,11 +36,10 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "Player ID: " . $row["Player_ID"]. " - In-Game Name: " . $row["In_Game_Player_Name"] . "<br>";
+    while ($row = $result->fetch_assoc()) {
+        echo "Player ID: " . $row["Player_ID"] . " - In-Game Name: " . $row["In_Game_Player_Name"] . "<br>";
     }
 } else {
     echo "0 results";
 }
 $conn->close();
-?>
