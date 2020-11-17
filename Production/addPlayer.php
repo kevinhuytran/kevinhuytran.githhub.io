@@ -33,10 +33,10 @@ echo "Image: $playerImage<br>";
 echo "Tags: $playerTags<br>";
 
 $sql = "INSERT INTO Players (Team_ID, In_Game_Player_Name, Player_Name, Player_Description, Player_Settings, Link, Image, Tags)
-VALUES (1,\"$playerInGame\",\"$playerName\",\"$playerDesc\",\"$playerSettings\",\"$playerLink\",\"$playerImage\",\"$playerTags\")";
+VALUES (4,\"$playerInGame\",\"$playerName\",\"$playerDesc\",\"$playerSettings\",\"$playerLink\",\"$playerImage\",\"$playerTags\")";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "New record created successfully<br>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

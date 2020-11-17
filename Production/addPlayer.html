@@ -12,6 +12,7 @@
             font-family: "DejaVu Sans Mono", sans-serif;
         }
     </style>
+    <script src="indexValidationForm.js"></script>
 </head>
 <body>
 <header>
@@ -37,7 +38,9 @@
 </header>
 <main class="container-md">
     <h1>Submit a Player Profile!</h1>
-    <form action="addToDatabase.php" method="post">
+    <form action="addToDatabase.php" method="post" onsubmit="return validateForm(document.getElementById('playerInGame'),
+    document.getElementById('playerName'),document.getElementById('playerDescription'),document.getElementById('playerSettings'),
+    document.getElementById('playerLink'),document.getElementById('playerImage'), document.getElementById('playerTags'))">
         <div class="form-group">
             <label for="playerInGame">In-Game Name</label>
             <input type="text" class="form-control" id="playerInGame" name="playerInGame">
