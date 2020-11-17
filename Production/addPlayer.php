@@ -1,17 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "ZQMgH1SFiWal";
-$dbname = "EsportsEncyclopedia";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully<br>";
+include("connect.php");
 
 echo "We have received your input!<br>";
 echo "Here is the following:<br>";
