@@ -29,7 +29,7 @@ echo "Image: $gameImage<br>";
 echo "Tags: $gameTags<br>";
 
 $sql = "INSERT INTO Games (Game_Title, Game_Description, Link, Image, Tags)
-VALUES (\"$gameTitle\",\"$gameDescription\",\"$gameLink\",\"$gameImages\",\"$gameTags\")";
+VALUES (\"$gameTitle\",\"$gameDescription\",\"$gameLink\",\"$gameImage\",\"$gameTags\")";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully <br>";
