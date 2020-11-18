@@ -11,9 +11,38 @@ $playerName = $_POST["playerName"];
 $playerDesc = nl2br($_POST["playerDescription"]);
 $playerSettings = $_POST["playerSettings"];
 $playerLink = $_POST["playerLink"];
-$playerImage = $_POST["playerImage"];
+$playerImage = $_FILES["playerImage"];
 $playerTags = $_POST["playerTags"];
 
+// stuff to do with image file
+$fileName = $_FILES['playerImage']['name'];
+$fileTmpName = $_FILES['playerImage']['tmp_name'];
+$fileSize = $_FILES['playerImage']['size'];
+$fileError = $_FILES['playerImage']['error'];
+$fileType = $_FILES['playerImage']['type'];
+
+$fileExt = explode('.', $fileName);
+$fileActualExt = strtolower(end($fileExt));
+
+$allowed = array('jpg', 'jpeg', 'png', 'pdf');
+if (in_array($fileActualExt, $allowed)) {
+    if ($fileError === 0) {
+        if ($fileSize < 1000000) {
+            $fileNameNew = uniqid('', true).".".$fileActualExt;
+            $fileDestination = 'images/'.$fileNameNew;
+            move_uploaded_file($fileTmpName, $fileDestination);
+            echo "File uploaded successfully";
+        } else {
+            echo "File is bigger than 1MB!";
+        }
+    } else {
+        echo "Error uploading the file";
+    }
+} else {
+    echo "You cannot upload files of this type";
+}
+
+// display
 echo "In-Game Name: $playerInGame<br>";
 echo "Actual Name: $playerName<br>";
 echo "Description: $playerDesc<br>";
@@ -23,7 +52,7 @@ echo "Image: $playerImage<br>";
 echo "Tags: $playerTags<br>";
 
 $sql = "INSERT INTO Players (Team_ID, In_Game_Player_Name, Player_Name, Player_Description, Player_Settings, Link, Image, Tags)
-VALUES (4,\"$playerInGame\",\"$playerName\",\"$playerDesc\",\"$playerSettings\",\"$playerLink\",\"$playerImage\",\"$playerTags\")";
+        VALUES (4,'$playerInGame','$playerName','$playerDesc','$playerSettings','$playerLink','$playerImage','$playerTags')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
@@ -37,7 +66,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
-        echo "Player ID: " . $row["Player_ID"] . " - In-Game Name: " . $row["In_Game_Player_Name"] . "<br>";
+        $Player_ID = $row['Player_ID'];
+        echo "<a href='viewPlayer.php?Player_ID=$Player_ID'>In-Game Name:</a>" . $row["In_Game_Player_Name"] . "<br>";
     }
 } else {
     echo "0 results";
