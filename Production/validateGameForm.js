@@ -1,4 +1,4 @@
-function validateForm(gameTitle, gameImage, gameIcon, gameDesc, gameTags) {
+function validateForm(gameTitle, gameDesc, gameTags) {
     if (gameTitle.value.length == 0) {
         alert("Game Title can't be 0 characters!");
         return false;
