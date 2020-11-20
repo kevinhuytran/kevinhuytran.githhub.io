@@ -38,28 +38,42 @@
 </header>
 <main class="container-md">
     <h1>Submit a Player Profile!</h1>
-    <form action="addToDatabase.php" method="post" onsubmit="return validateForm(document.getElementById('playerInGame'),
-    document.getElementById('playerName'),document.getElementById('playerDescription'),document.getElementById('playerSettings'),
-    document.getElementById('playerLink'),document.getElementById('playerImage'), document.getElementById('playerTags'))">
+    <form action="addToDatabase.php"
+          method="post"
+          onsubmit="return validateForm(
+              document.getElementById('playerInGameName'),
+              document.getElementById('playerName'),
+              document.getElementById('playerCountry'),
+              document.getElementById('playerDOB'),
+              document.getElementById('playerDesc'),
+              document.getElementById('playerSettings'),
+              document.getElementById('playerImage'),
+              document.getElementById('playerTags')
+              )
+          ">
         <div class="form-group">
-            <label for="playerInGame">In-Game Name</label>
-            <input type="text" class="form-control" id="playerInGame" name="playerInGame">
+            <label for="playerInGameName">In-Game Name</label>
+            <input type="text" class="form-control" id="playerInGameName" name="playerInGameName">
         </div>
         <div class="form-group">
             <label for="playerName">Actual Name</label>
             <input type="text" class="form-control" id="playerName" name="playerName">
         </div>
         <div class="form-group">
-            <label for="playerDescription">Description</label>
-            <textarea class="form-control" id="playerDescription" rows="5" name="playerDescription" style="white-space: pre-line;"></textarea>
+            <label for="playerCountry">Country</label>
+            <input type="text" class="form-control" id="playerCountry" name="playerCountry">
+        </div>
+        <div class="form-group">
+            <label for="playerDOB">Country</label>
+            <input type="text" class="form-control" id="playerDOB" name="playerDOB">
+        </div>
+        <div class="form-group">
+            <label for="playerDesc">Description</label>
+            <textarea class="form-control" id="playerDesc" rows="5" name="playerDesc" style="white-space: pre-line;"></textarea>
         </div>
         <div class="form-group">
             <label for="playerSettings">Settings</label>
             <textarea class="form-control" id="playerSettings" rows="3" name="playerSettings"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="playerLink">Link</label>
-            <input type="text" class="form-control" id="playerLink" name="playerLink">
         </div>
         <div class="form-group">
             <label for="playerImage">Image</label>
