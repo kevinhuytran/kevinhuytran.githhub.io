@@ -6,20 +6,21 @@ if(isset($_POST["submit"])) {
     echo "Here is the following:<br>";
 }
 
-$playerInGame = $_POST["playerInGame"];
-$playerName = $_POST["playerName"];
-$playerDesc = nl2br($_POST["playerDescription"]);
-$playerSettings = $_POST["playerSettings"];
-$playerLink = $_POST["playerLink"];
-$playerImage = $_FILES["playerImage"];
-$playerTags = $_POST["playerTags"];
+$playerInGameName = $_POST['playerInGameName'];
+$playerName = $_POST['playerName'];
+$playerCountry = $_POST['playerCountry'];
+$playerDOB = $_POST['playerDOB'];
+$playerDesc = nl2br($_POST['playerDesc']);
+$playerSettings = $_POST['playerSettings'];
+$playerImage = $_FILES['playerImage'];
+$playerTags = $_POST['playerTags'];
 
 // stuff to do with image file
-$fileName = $_FILES['playerImage']['name'];
-$fileTmpName = $_FILES['playerImage']['tmp_name'];
-$fileSize = $_FILES['playerImage']['size'];
-$fileError = $_FILES['playerImage']['error'];
-$fileType = $_FILES['playerImage']['type'];
+$fileName = $playerImage['name'];
+$fileTmpName = $playerImage['tmp_name'];
+$fileSize = $playerImage['size'];
+$fileError = $playerImage['error'];
+$fileType = $playerImage['type'];
 
 $fileExt = explode('.', $fileName);
 $fileActualExt = strtolower(end($fileExt));
@@ -28,7 +29,7 @@ $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 if (in_array($fileActualExt, $allowed)) {
     if ($fileError === 0) {
         if ($fileSize < 1000000) {
-            $fileNameNew = uniqid('', true).".".$fileActualExt;
+            $fileNameNew = $playerName.".".$fileActualExt;
             $fileDestination = 'images/'.$fileNameNew;
             move_uploaded_file($fileTmpName, $fileDestination);
             echo "File uploaded successfully";
@@ -43,16 +44,16 @@ if (in_array($fileActualExt, $allowed)) {
 }
 
 // display
-echo "In-Game Name: $playerInGame<br>";
+echo "In-Game Name: $playerInGameName<br>";
 echo "Actual Name: $playerName<br>";
+echo "Country: $playerCountry<br>";
+echo "Date-of-Birth: $playerDOB<br>";
 echo "Description: $playerDesc<br>";
 echo "Settings: $playerSettings<br>";
-echo "Link: $playerLink<br>";
-echo "Image: $playerImage<br>";
 echo "Tags: $playerTags<br>";
 
-$sql = "INSERT INTO Players (Team_ID, In_Game_Player_Name, Player_Name, Player_Description, Player_Settings, Link, Image, Tags)
-        VALUES (4,'$playerInGame','$playerName','$playerDesc','$playerSettings','$playerLink','$playerImage','$playerTags')";
+$sql = "INSERT INTO Players (Team_ID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
+        VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$fileDestination','$playerTags')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
