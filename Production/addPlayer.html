@@ -38,7 +38,8 @@
 </header>
 <main class="container-md">
     <h1>Submit a Player Profile!</h1>
-    <form action="addToDatabase.php"
+    <form action="addPlayer.php"
+          enctype="multipart/form-data"
           method="post"
           onsubmit="return validateForm(
               document.getElementById('playerInGameName'),
