@@ -16,6 +16,7 @@ $playerImage = $_FILES['playerImage'];
 $playerTags = $_POST['playerTags'];
 
 // stuff to do with image file
+print_r($_FILES);
 $fileName = $playerImage['name'];
 $fileTmpName = $playerImage['tmp_name'];
 $fileSize = $playerImage['size'];
@@ -26,6 +27,9 @@ $fileExt = explode('.', $fileName);
 $fileActualExt = strtolower(end($fileExt));
 
 $allowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+$fileDestination = 'images/player-default.png';
+
 if (in_array($fileActualExt, $allowed)) {
     if ($fileError === 0) {
         if ($fileSize < 1000000) {
@@ -52,7 +56,7 @@ echo "Description: $playerDesc<br>";
 echo "Settings: $playerSettings<br>";
 echo "Tags: $playerTags<br>";
 
-$sql = "INSERT INTO Players (Team_ID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
+$sql = "INSERT INTO Players (TeamID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
         VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$fileDestination','$playerTags')";
 
 if ($conn->query($sql) === TRUE) {
