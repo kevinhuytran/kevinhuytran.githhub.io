@@ -38,32 +38,25 @@
 </header>
 <main class="container-md">
     <h1>Submit a Team Profile!</h1>
-    <form action="addToTeam.php" method="post" onsubmit="return validateForm(document.getElementById('playerInGame'),
-    document.getElementById('playerName'),document.getElementById('playerDescription'),document.getElementById('playerSettings'),
-    document.getElementById('playerLink'),document.getElementById('playerImage'), document.getElementById('playerTags'))">
+    <form action="addToTeam.php"
+          method="post"
+          onsubmit="return validateForm(
+              document.getElementById('teamName'),
+              document.getElementById('teamDesc'),
+              document.getElementById('teamTags')
+              )
+    ">
         <div class="form-group">
-            <label for="playerInGame">In-Game Name</label>
-            <input type="text" class="form-control" id="playerInGame" name="playerInGame">
+            <label for="teamName">Team Name</label>
+            <input type="text" class="form-control" id="teamName" name="teamName">
         </div>
         <div class="form-group">
-            <label for="playerName">Actual Name</label>
-            <input type="text" class="form-control" id="playerName" name="playerName">
+            <label for="teamDesc">Description</label>
+            <textarea class="form-control" id="teamDesc" rows="5" name="teamDesc" style="white-space: pre-line;"></textarea>
         </div>
         <div class="form-group">
-            <label for="playerDescription">Description</label>
-            <textarea class="form-control" id="playerDescription" rows="5" name="playerDescription" style="white-space: pre-line;"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="playerSettings">Settings</label>
-            <textarea class="form-control" id="playerSettings" rows="3" name="playerSettings"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="playerLink">Link</label>
-            <input type="text" class="form-control" id="playerLink" name="playerLink">
-        </div>
-        <div class="form-group">
-            <label for="playerImage">Image</label>
-            <input type="file" class="form-control" id="playerImage" name="playerImage">
+            <label for="teamImage">Image</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="teamImage" name="teamImage">
         </div>
         <div class="form-group">
             <label for="playerTags">Tags</label>
