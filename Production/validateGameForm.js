@@ -1,5 +1,6 @@
 function validateForm(gameTitle, gameDesc, gameTags) {
-    if (gameTitle.value.length == 0) {
+    let titleValidation = /^[a-zA-Z\s]+$/;
+    if (gameTitle.value.length == 0 && gameTitle.value.match(titleValidation)) {
         alert("Game Title can't be 0 characters!");
         return false;
     }
