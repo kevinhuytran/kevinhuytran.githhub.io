@@ -1,7 +1,7 @@
 function validateForm(playerInGameName, playerName, playerCountry, playerDOB, playerDesc, playerSettings, playerTags) {
     let playerInGameValidation = /^[0-9a-zA-Z]+$/;
     let nameValidation = /^[a-zA-Z\s]+$/;
-    if (playerInGameName.value.length == 0 || playerName.value.length == 0) {
+    if (playerInGameName.value.length === 0 || playerName.value.length === 0) {
         alert("In-Game and Actual Name can't be 0 characters long!");
         return false;
     }
