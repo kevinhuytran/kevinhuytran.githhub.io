@@ -1,18 +1,10 @@
-function validateForm(gameTitle, gameDescription, gameLink, gameImage, gameTags) {
+function validateForm(gameTitle, gameImage, gameIcon, gameDesc, gameTags) {
     if (gameTitle.value.length == 0) {
         alert("Game Title can't be 0 characters!");
         return false;
     }
-    if (gameDescription.value.length > 3000) {
-        alert("The description can only be a max of 3000 characters!");
-        return false;
-    }
-    if (gameLink.value.length > 300) {
-        alert("The link can only be a max of 300 characters!");
-        return false;
-    }
-    if (gameImage.value.length > 300) {
-        alert("The game image can only be a max of 300 characters!");
+    if (gameDesc.value.length > 5000) {
+        alert("The description can only be a max of 5000 characters!");
         return false;
     }
     if (gameTags.value.length > 300) {
@@ -20,4 +12,12 @@ function validateForm(gameTitle, gameDescription, gameLink, gameImage, gameTags)
         return false;
     }
     return true;
+}
+
+function ValidateSize(file) {
+    let FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 1) {
+        alert('File size exceeds 1 MB');
+        $(file).val('');
+    }
 }
