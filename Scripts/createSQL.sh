@@ -4,6 +4,7 @@ CREATE TABLE Games(
 	GameID INT AUTO_INCREMENT,
 	Title VARCHAR(50),
 	ImagePath VARCHAR(100),
+	IconPath VARCHAR(100),
 	GameDesc VARCHAR(5000),
 	Tags VARCHAR(300),
 	PRIMARY KEY(GameID)
@@ -19,15 +20,19 @@ CREATE TABLE Sponsors(
 );
 CREATE TABLE Teams(
 	TeamID INT AUTO_INCREMENT,
+	GameID INT,
 	SponsorID INT,
+	TeamName VARCHAR(40),
 	ImagePath VARCHAR(100),
 	TeamDesc VARCHAR(5000),
 	Tags VARCHAR(300),
 	PRIMARY KEY(TeamID),
+	FOREIGN KEY(GameID) REFERENCES Sponsors(SponsorID),
 	FOREIGN KEY(SponsorID) REFERENCES Sponsors(SponsorID)
 );
 CREATE TABLE Players(
 	PlayerID INT AUTO_INCREMENT,
+	GameID INT,
 	TeamID INT,
 	InGameName VARCHAR(30),
 	FullName VARCHAR(40),
@@ -38,6 +43,7 @@ CREATE TABLE Players(
 	ImagePath VARCHAR(100),
 	Tags VARCHAR(300),
 	PRIMARY KEY(PlayerID),
+	FOREIGN KEY(GameID) REFERENCES Sponsors(SponsorID),
 	FOREIGN KEY(TeamID) REFERENCES Teams(TeamID)
 );
 CREATE TABLE Users(
@@ -45,5 +51,5 @@ CREATE TABLE Users(
 	Username VARCHAR(20),
 	Password VARCHAR(20),
 	PRIMARY KEY(UserID)
-)
+);
 EOF
