@@ -1,4 +1,4 @@
-function validateForm(playerInGameName, playerName, playerCountry, playerDOB, playerDesc, playerSettings, playerImage, playerTags) {
+function validateForm(playerInGameName, playerName, playerCountry, playerDOB, playerDesc, playerSettings, playerTags) {
     let playerInGameValidation = /^[0-9a-zA-Z]+$/;
     let nameValidation = /^[a-zA-Z\s]+$/;
     if (playerInGameName.value.length == 0 || playerName.value.length == 0) {
@@ -33,13 +33,17 @@ function validateForm(playerInGameName, playerName, playerCountry, playerDOB, pl
         alert("The setting can only be a max of 500 cahracters!");
         return false;
     }
-    if (playerImage.value.length > 100) {
-        alert("The player image can only be a max of 100 characters");
-        return false;
-    }
     if (playerTags.value.length > 300) {
         alert("The player tags can only be a max of 300 characters");
         return false;
     }
     return true;
+}
+
+function ValidateSize(file) {
+    let FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 1) {
+        alert('File size exceeds 1 MB');
+        $(file).val('');
+    }
 }
