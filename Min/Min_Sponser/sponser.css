@@ -1,0 +1,18 @@
+/* responsiveness + format */
+div.gallery {
+    margin: 20px;
+    float: left;
+    width: 450px;
+}
+
+
+div.gallery img {
+    margin: 20px;
+    width: 100%;
+}
+
+div.desc {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
