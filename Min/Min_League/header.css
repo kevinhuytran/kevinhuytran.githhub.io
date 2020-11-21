@@ -1,0 +1,53 @@
+header nav {
+    align-items: center;
+    background-color: #2B303A;
+    display: flex;
+    font-family: "DejaVu Sans Mono", sans-serif;
+    justify-content: space-between;
+}
+
+header nav a {
+    text-decoration: none;
+}
+
+/* unvisited link */
+header nav a:link {
+    color: #E8E8E8;
+}
+
+/* visited link */
+header nav a:visited {
+    color: #E8E8E8;
+}
+
+/* mouse over link */
+header nav a:hover {
+    color: #E8E8E8;
+}
+
+/* selected link */
+header nav a:active {
+    color: #E8E8E8;
+}
+
+header nav img {
+    filter: invert(67%) sepia(96%) saturate(1327%) hue-rotate(349deg) brightness(102%) contrast(96%);
+    justify-self: flex-start;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+.categories {
+    display: flex;
+    justify-content: space-evenly;
+    width: 240px;
+}

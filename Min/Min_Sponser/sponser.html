@@ -6,7 +6,21 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="sponser.css">    
         <link rel='stylesheet' href='header.css'/>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+              $("img").hover(function(){
+                $(this).css("transition", "transform .3s");
 
+                $(this).css("transform", "scale(1.15)");
+                }, function(){
+                $(this).css("transform", "scale(1)");
+              });
+            });
+            </script>
+        
+            
         <title>Sponser</title>
     </head>
 
@@ -26,7 +40,7 @@
 
         <div class="gallery">
             <a href="https://fnatic.com/">
-                <img alt="Fnatic" src="fnatic.png">
+                <img alt="Fnatic" src="fnatic.jpg">
             </a>
             <div class="desc">Fnatic</div>
         </div>
@@ -49,7 +63,7 @@
 
         <div class="gallery">
             <a href="https://fnatic.com/">
-                <img alt="Fnatic" src="fnatic.png">
+                <img alt="Fnatic" src="fnatic.jpg">
             </a>
             <div class="desc">Fnatic</div>
         </div>
@@ -72,7 +86,7 @@
 
         <div class="gallery">
             <a href="https://fnatic.com/">
-                <img alt="Fnatic" src="fnatic.png">
+                <img alt="Fnatic" src="fnatic.jpg">
             </a>
             <div class="desc">Fnatic</div>
         </div>
@@ -90,5 +104,8 @@
             </a>
             <div class="desc">SKT T1</div>
         </div>
+
+        <script type="text/JavaScript" src="animation.js"></script>
+
     </body>
 </html>
