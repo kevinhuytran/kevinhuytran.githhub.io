@@ -39,28 +39,24 @@ if(isset($_POST['submit'])) {
     echo "Here is the following:<br>";
 }
 
-$playerInGameName = $_POST['playerInGameName'];
-$playerName = $_POST['playerName'];
-$playerCountry = $_POST['playerCountry'];
-$playerDOB = $_POST['playerDOB'];
-$playerDesc = nl2br($_POST['playerDesc']);
-$playerSettings = $_POST['playerSettings'];
-$playerImage = $_FILES['playerImage'];
-$playerTags = $_POST['playerTags'];
+$gameID = (int)$_POST['Game'];
+$sponsorID = (int)$_POST['Sponsor'];
+$teamName = $_POST['teamName'];
+$teamDesc = nl2br($_POST['teamDesc']);
+$teamImage = $_FILES['teamImage'];
+$teamTags = $_POST['teamTags'];
 
-$playerNewImage = create_image($playerImage,$playerName);
+$teamNewImage = create_image($teamImage,$teamName);
 
 // display
-echo "In-Game Name: $playerInGameName<br>";
-echo "Actual Name: $playerName<br>";
-echo "Country: $playerCountry<br>";
-echo "Date-of-Birth: $playerDOB<br>";
-echo "Description: $playerDesc<br>";
-echo "Settings: $playerSettings<br>";
-echo "Tags: $playerTags<br>";
+echo "Game ID: " . $gameID . "<br>";
+echo "Sponsor ID: " . $sponsorID . "<br>";
+echo "Team Name: " . $teamName . "<br>";
+echo "Team Description: " . $teamDesc . "<br>";
+echo "Team Tags: " . $teamTags . "<br>";
 
-$sql = "INSERT INTO Players (TeamID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
-        VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$playerNewImage','$playerTags')";
+$sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
+        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
@@ -68,14 +64,14 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-$sql = "SELECT Player_ID, In_Game_Player_Name FROM Players";
+$sql = "SELECT TeamID, TeamName FROM Teams";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
-        $Player_ID = $row['Player_ID'];
-        echo "<a href='viewPlayer.php?Player_ID=$Player_ID'>In-Game Name:</a>" . $row["In_Game_Player_Name"] . "<br>";
+        echo "Team ID: " . $row['TeamID'] . "<br>";
+        echo "Team Name: " . $row['TeamName'] . "<br>";
     }
 } else {
     echo "0 results";
