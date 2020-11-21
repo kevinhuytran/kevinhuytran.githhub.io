@@ -38,7 +38,7 @@
 </header>
 <main class="container-md">
     <h1>Submit a Team Profile!</h1>
-    <form action="addTeamDB.php"
+    <form action="insertTeam.php"
           enctype="multipart/form-data"
           method="post"
           onsubmit="return validateForm(
