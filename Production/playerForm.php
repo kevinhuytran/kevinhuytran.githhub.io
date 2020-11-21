@@ -52,6 +52,42 @@
               )
     ">
         <div class="form-group">
+            <label for="Game">Select Game</label>
+            <select class="form-control" id="Game" name="Game">
+                <?php
+                include("connect.php");
+                $sql = "SELECT GameID, Title FROM Games";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<option value='".$row['GameID']."'>".$row['Title']."</option>";
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $conn->close();
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Team">Select Team</label>
+            <select class="form-control" id="Team" name="Team">
+                <?php
+                include("connect.php");
+                $sql = "SELECT TeamID, TeamName FROM Teams";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<option value='".$row['TeamID']."'>".$row['TeamName']."</option>";
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $conn->close();
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="playerInGameName">In-Game Name</label>
             <input type="text" class="form-control" id="playerInGameName" name="playerInGameName">
         </div>
