@@ -1,7 +1,40 @@
 <?php
 include("connect.php");
 
-if(isset($_POST["submit"])) {
+function create_image(&$image, $title) {
+    $fileName = $image['name'];
+    $fileTmpName = $image['tmp_name'];
+    $fileSize = $image['size'];
+    $fileError = $image['error'];
+    // $fileType = $image['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
+
+    $fileDestination = 'images/game-default.png';
+
+    if (in_array($fileActualExt, $allowed)) {
+        if ($fileError === 0) {
+            if ($fileSize < 1000000) {
+                $fileNameNew = $title.".".$fileActualExt;
+                $fileDestination = 'images/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                echo "File uploaded successfully<br>";
+            } else {
+                echo "File is bigger than 1MB!<br>";
+            }
+        } else {
+            echo "Error uploading the file<br>";
+        }
+    } else {
+        echo "You cannot upload files of this type<br>";
+    }
+    return $fileDestination;
+}
+
+if(isset($_POST['submit'])) {
     echo "We have received your input!<br>";
     echo "Here is the following:<br>";
 }
@@ -15,37 +48,7 @@ $playerSettings = $_POST['playerSettings'];
 $playerImage = $_FILES['playerImage'];
 $playerTags = $_POST['playerTags'];
 
-// stuff to do with image file
-print_r($_FILES);
-$fileName = $playerImage['name'];
-$fileTmpName = $playerImage['tmp_name'];
-$fileSize = $playerImage['size'];
-$fileError = $playerImage['error'];
-$fileType = $playerImage['type'];
-
-$fileExt = explode('.', $fileName);
-$fileActualExt = strtolower(end($fileExt));
-
-$allowed = array('jpg', 'jpeg', 'png', 'pdf');
-
-$fileDestination = 'images/player-default.png';
-
-if (in_array($fileActualExt, $allowed)) {
-    if ($fileError === 0) {
-        if ($fileSize < 1000000) {
-            $fileNameNew = $playerName.".".$fileActualExt;
-            $fileDestination = 'images/'.$fileNameNew;
-            move_uploaded_file($fileTmpName, $fileDestination);
-            echo "File uploaded successfully";
-        } else {
-            echo "File is bigger than 1MB!";
-        }
-    } else {
-        echo "Error uploading the file";
-    }
-} else {
-    echo "You cannot upload files of this type";
-}
+$playerNewImage = create_image($gameImage,$playerName);
 
 // display
 echo "In-Game Name: $playerInGameName<br>";
@@ -57,7 +60,7 @@ echo "Settings: $playerSettings<br>";
 echo "Tags: $playerTags<br>";
 
 $sql = "INSERT INTO Players (TeamID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
-        VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$fileDestination','$playerTags')";
+        VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$playerNewImage','$playerTags')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
