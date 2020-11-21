@@ -39,6 +39,8 @@ if(isset($_POST['submit'])) {
     echo "Here is the following:<br>";
 }
 
+$gameID = $_POST['Game'];
+$teamID = $_POST['Team'];
 $playerInGameName = $_POST['playerInGameName'];
 $playerName = $_POST['playerName'];
 $playerCountry = $_POST['playerCountry'];
@@ -59,8 +61,8 @@ echo "Description: $playerDesc<br>";
 echo "Settings: $playerSettings<br>";
 echo "Tags: $playerTags<br>";
 
-$sql = "INSERT INTO Players (TeamID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
-        VALUES (4,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$playerNewImage','$playerTags')";
+$sql = "INSERT INTO Players (GameID, TeamID, InGameName, FullName, Country, DOB, PlayerDesc, Settings, ImagePath, Tags)
+        VALUES ($gameID, $teamID,'$playerInGameName','$playerName','$playerCountry','$playerDOB','$playerDesc','$playerSettings','$playerNewImage','$playerTags')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
