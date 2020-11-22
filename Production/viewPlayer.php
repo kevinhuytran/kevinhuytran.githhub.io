@@ -48,8 +48,8 @@
     </nav>
 </header>
 <main class="container-md">
-    <div class="container-fluid" style="background: yellow">
-        <div class="container-sm" style="background: green">
+    <div class="d-md-flex" style="background: yellow">
+        <div class="img-fluid mx-auto" style="background: green; max-width: 300px">
         <?php
         require("connect.php");
         $playerID = $_GET['PlayerID'];
@@ -60,7 +60,7 @@
         $conn->close();
         ?>
         </div>
-        <div class="container-sm" style="background: purple">
+        <div class="container-fluid" style="background: purple">
             <?php
             require("connect.php");
             $playerID = $_GET['PlayerID'];
