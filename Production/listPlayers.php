@@ -48,6 +48,7 @@
     </nav>
 </header>
 <main class="container-md">
+    <h2>Players</h2>
     <div class="list-group">
         <?php
         include("connect.php");
