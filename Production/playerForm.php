@@ -111,8 +111,8 @@
             <input type="text" class="form-control" id="playerCountry" name="playerCountry">
         </div>
         <div class="form-group">
-            <label for="playerDOB">Country</label>
-            <input type="text" class="form-control" id="playerDOB" name="playerDOB">
+            <label for="playerDOB">Date of Birth</label>
+            <input type="text" class="form-control" id="playerDOB" name="playerDOB" placeholder="YYYY-MM-DD">
         </div>
         <div class="form-group">
             <label for="playerDesc">Description</label>
