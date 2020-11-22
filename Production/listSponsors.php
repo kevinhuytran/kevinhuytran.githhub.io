@@ -72,7 +72,7 @@
                 echo "</div></div>";
             }
         } else {
-            echo "There are no games available at the moment. Please try again later.";
+            echo "There are no sponsors available at the moment. Please try again later.";
         }
         $conn->close();
         ?>

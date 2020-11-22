@@ -71,7 +71,7 @@
                 echo "<a href='viewTeam.php?TeamID=" . $row['p.TeamID'] . "' class='list-group-item list-group-item-action'>" . $row['p.TeamName'] . "</a>";
             }
         } else {
-            echo "0 results";
+            echo "There are no teams available at the moment. Please try again later.";
         }
         $conn->close();
         ?>

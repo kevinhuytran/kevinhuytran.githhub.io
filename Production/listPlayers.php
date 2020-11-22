@@ -61,7 +61,7 @@
                 echo "<a href='viewPlayer.php?PlayerID=" . $PlayerID . "' class='list-group-item list-group-item-action'>" . $row["InGameName"] . "</a>";
             }
         } else {
-            echo "0 results";
+            echo "There are no players available at the moment. Please try again later.";
         }
         $conn->close();
         ?>
