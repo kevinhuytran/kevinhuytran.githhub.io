@@ -48,7 +48,7 @@
     </nav>
 </header>
 <main class="container-md">
-    <div class="d-md-flex" style="background: yellow">
+    <div class="d-md-flex">
         <div class="img-fluid mx-auto" style="max-width: 300px">
         <?php
         require("connect.php");
