@@ -60,17 +60,15 @@
 </header>
 <main class="container-md">
     <h2>Teams</h2>
-    <div class="row">
+    <div class="list-group">
         <?php
         include("connect.php");
-        $sql = "SELECT TeamID, TeamName, ImagePath FROM Teams";
+        $sql = "SELECT p.TeamID, p.TeamName, g.IconPath FROM Players p, Games g WHERE p.GameID=g.GameID";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo "<div class='col-md-4'><div class='thumbnail'>";
-                echo "<a href='viewTeam.php?TeamID=" . $row['TeamID'] . "' target='_blank'><img src='" . $row['ImagePath'] . "' alt='TeamPhoto' style='width:100%'" . "</a>";
-                echo "</div></div>";
+                echo "<a href='viewTeam.php?TeamID=" . $row['p.TeamID'] . "' class='list-group-item list-group-item-action'>" . $row['p.TeamName'] . "</a>";
             }
         } else {
             echo "0 results";
