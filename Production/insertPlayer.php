@@ -70,14 +70,14 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-$sql = "SELECT Player_ID, In_Game_Player_Name FROM Players";
+$sql = "SELECT PlayerID, InGameName FROM Players";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
-        $Player_ID = $row['Player_ID'];
-        echo "<a href='viewPlayer.php?Player_ID=$Player_ID'>In-Game Name:</a>" . $row["In_Game_Player_Name"] . "<br>";
+        $PlayerID = $row['PlayerID'];
+        echo "<a href='viewPlayer.php?PlayerID=$PlayerID'>In-Game Name:</a>" . $row["InGameName"] . "<br>";
     }
 } else {
     echo "0 results";
