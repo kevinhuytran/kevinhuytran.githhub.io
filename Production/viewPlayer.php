@@ -49,7 +49,7 @@
 </header>
 <main class="container-md">
     <div class="d-md-flex" style="background: yellow">
-        <div class="img-fluid mx-auto" style="background: green; max-width: 300px">
+        <div class="img-fluid mx-auto" style="max-width: 300px">
         <?php
         require("connect.php");
         $playerID = $_GET['PlayerID'];
@@ -60,7 +60,7 @@
         $conn->close();
         ?>
         </div>
-        <div class="container-fluid" style="background: purple">
+        <div class="container-fluid">
             <?php
             require("connect.php");
             $playerID = $_GET['PlayerID'];
@@ -72,7 +72,7 @@
             ?>
         </div>
     </div>
-    <div class="container-fluid" style="background: red">
+    <div class="container-fluid">
         <?php
         require("connect.php");
         $playerID = $_GET['PlayerID'];
@@ -83,7 +83,6 @@
         $conn->close();
         ?>
     </div>
-
 </main>
 </body>
 </html>
