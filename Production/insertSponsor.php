@@ -45,7 +45,7 @@ $sponsorIcon = $_FILES['sponsorIcon'];
 $sponsorDesc = nl2br($_POST['sponsorDesc']);
 $sponsorTags = $_POST['sponsorTags'];
 
-$sponsorNewImage = create_image($sponsorImage,$sponsorName);
+$sponsorNewImage = create_image($sponsorImage,'SPONSOR-' . $sponsorName);
 $sponsorNewIcon = create_image($sponsorImage,$sponsorName . 'ICON');
 
 echo "Game Title: $sponsorName<br>";

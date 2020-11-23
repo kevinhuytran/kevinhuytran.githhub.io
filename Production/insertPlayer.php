@@ -50,7 +50,7 @@ $playerSettings = $_POST['playerSettings'];
 $playerImage = $_FILES['playerImage'];
 $playerTags = $_POST['playerTags'];
 
-$playerNewImage = create_image($playerImage,$playerName);
+$playerNewImage = create_image($playerImage,'PLAYER-' . $playerName);
 
 // display
 echo "In-Game Name: $playerInGameName<br>";

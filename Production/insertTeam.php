@@ -46,7 +46,7 @@ $teamDesc = nl2br($_POST['teamDesc']);
 $teamImage = $_FILES['teamImage'];
 $teamTags = $_POST['teamTags'];
 
-$teamNewImage = create_image($teamImage,$teamName);
+$teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
 
 // display
 echo "Game ID: " . $gameID . "<br>";
