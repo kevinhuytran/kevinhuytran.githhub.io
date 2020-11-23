@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
-            $("img").hover(function(){
+            $("main img").hover(function(){
                 $(this).css("transition", "transform .3s");
 
                 $(this).css("transform", "scale(1.15)");
@@ -21,6 +21,10 @@
     <style>
         header {
             font-family: "DejaVu Sans Mono", sans-serif;
+        }
+        main img {
+            height: 20px;
+            width: 20px;
         }
     </style>
 </head>
@@ -62,12 +66,15 @@
     <div class="list-group">
         <?php
         include("connect.php");
-        $sql = "SELECT p.TeamID, p.TeamName, g.IconPath FROM Players p, Games g WHERE p.GameID=g.GameID";
+        $sql = "SELECT Teams.TeamID, Teams.TeamName, Games.IconPath FROM Teams INNER JOIN Games ON Teams.GameID=Games.GameID";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo "<a href='viewTeam.php?TeamID=" . $row['p.TeamID'] . "' class='list-group-item list-group-item-action'>" . $row['p.TeamName'] . "</a>";
+                echo "<a href='viewTeam.php?TeamID=" . $row['TeamID'] . "' class='list-group-item list-group-item-action'>";
+                echo "<img src='" . $row['IconPath'] . "' alt='Team Icon'>";
+                echo " " . $row['TeamName'];
+                echo "</a>";
             }
         } else {
             echo "There are no teams available at the moment. Please try again later.";
