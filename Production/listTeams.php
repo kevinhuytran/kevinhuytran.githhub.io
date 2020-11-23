@@ -55,6 +55,9 @@
                     <a class="nav-link" href="listPlayers.php">Players</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="listSponsors.php">Sponsors</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href=".">Teams</a>
                 </li>
             </ul>

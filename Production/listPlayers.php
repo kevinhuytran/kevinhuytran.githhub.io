@@ -40,6 +40,9 @@
                     <a class="nav-link" href=".">Players</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="listSponsors.php">Sponsors</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="listTeams.php">Teams</a>
                 </li>
             </ul>
