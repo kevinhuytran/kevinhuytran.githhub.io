@@ -54,22 +54,74 @@
     </nav>
 </header>
 <main class="container-md">
-    <h2>Teams</h2>
+    <h2>Games</h2>
     <div class="list-group">
         <?php
         include("connect.php");
-        $sql = "SELECT Teams.TeamID, Teams.TeamName, Games.IconPath FROM Teams INNER JOIN Games ON Teams.GameID=Games.GameID";
+        $search = $_GET['search'];
+        $sql = "SELECT GameID, Title FROM Games WHERE Tags LIKE '%" . $search . "%'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo "<a href='viewTeam.php?TeamID=" . $row['TeamID'] . "' class='list-group-item list-group-item-action'>";
-                echo "<img src='" . $row['IconPath'] . "' alt='Team Icon'>";
-                echo " " . $row['TeamName'];
-                echo "</a>";
+                echo "<a href='viewGame.php?GameID=" . $row['GameID'] . "' class='list-group-item list-group-item-action'>" . $row['Title'] . "</a>";
             }
         } else {
-            echo "There are no teams available at the moment. Please try again later.";
+            echo "There are no games that match this search.";
+        }
+        $conn->close();
+        ?>
+    </div>
+    <h2>Players</h2>
+    <div class="list-group">
+        <?php
+        include("connect.php");
+        $search = $_GET['search'];
+        $sql = "SELECT PlayerID, InGameName FROM Players WHERE Tags LIKE '%" . $search . "%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<a href='viewPlayer.php?PlayerID=" . $row['PlayerID'] . "' class='list-group-item list-group-item-action'>" . $row['InGameName'] . "</a>";
+            }
+        } else {
+            echo "There are no players that match this search.";
+        }
+        $conn->close();
+        ?>
+    </div>
+    <h2>Sponsors</h2>
+    <div class="list-group">
+        <?php
+        include("connect.php");
+        $search = $_GET['search'];
+        $sql = "SELECT SponsorID, Name FROM Sponsors WHERE Tags LIKE '%" . $search . "%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<a href='viewSponsor.php?SponsorID=" . $row['SponsorID'] . "' class='list-group-item list-group-item-action'>" . $row['Name'] . "</a>";
+            }
+        } else {
+            echo "There are no sponsors that match this search.";
+        }
+        $conn->close();
+        ?>
+    </div>
+    <h2>Teams</h2>
+    <div class="list-group">
+        <?php
+        include("connect.php");
+        $search = $_GET['search'];
+        $sql = "SELECT TeamID, TeamName FROM Teams WHERE Tags LIKE '%" . $search . "%'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<a href='viewTeam.php?TeamID=" . $row['TeamID'] . "' class='list-group-item list-group-item-action'>" . $row['TeamName'] . "</a>";
+            }
+        } else {
+            echo "There are no teams that match this search.";
         }
         $conn->close();
         ?>
