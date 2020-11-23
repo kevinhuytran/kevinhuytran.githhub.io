@@ -70,7 +70,7 @@
             // output data of each row
             while ($row = $result->fetch_assoc()) {
                 echo "<div class='col-md-4'><div class='thumbnail'>";
-                echo "<a href='viewGame.php?GameID=" . $row['GameID'] . "' target='_blank'><img src='" . $row['ImagePath'] . "' alt='Game Photo' style='width:100%'" . "</a>";
+                echo "<a href='viewGame.php?GameID=" . $row['GameID'] . "'><img src='" . $row['ImagePath'] . "' alt='Game Photo' style='width:100%'" . "</a>";
                 echo "</div></div>";
             }
         } else {

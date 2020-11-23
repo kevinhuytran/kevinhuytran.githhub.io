@@ -70,7 +70,7 @@
             // output data of each row
             while ($row = $result->fetch_assoc()) {
                 echo "<div class='col-md-4'><div class='thumbnail'>";
-                echo "<a href='viewSponsor.php?SponsorID=" . $row['SponsorID'] . "' target='_blank'><img src='" . $row['Imagepath'] . "' alt='Sponsor Logo' style='width:100%'" . "</a>";
+                echo "<a href='viewSponsor.php?SponsorID=" . $row['SponsorID'] . "'><img src='" . $row['Imagepath'] . "' alt='Sponsor Logo' style='width:100%'" . "</a>";
                 echo "</div></div>";
             }
         } else {
