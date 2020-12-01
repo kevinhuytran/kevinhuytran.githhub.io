@@ -82,7 +82,14 @@ $conn->close();
         </div>
         <div class="form-group">
             <label for="gameDesc">Description</label>
-            <textarea class="form-control" id="gameDesc" rows="5" name="gameDesc" style="white-space: pre-line;"><?php echo $row['GameDesc']; ?></textarea>
+            <textarea class="form-control" id="gameDesc" rows="5" name="gameDesc" style="white-space: pre-line;">
+                <?php
+                $gameDesc = $row['GameDesc'];
+                $breaks = array("<br />","<br>","<br/>");
+                $gameDesc = str_ireplace($breaks, "\r\n", $gameDesc);
+                echo $gameDesc;
+                ?>
+            </textarea>
         </div>
         <div class="form-group">
             <label for="gameTags">Tags</label>
