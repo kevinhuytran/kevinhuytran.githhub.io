@@ -1,10 +1,9 @@
 <?php
 require("connect.php");
 $gameID = $_GET['GameID'];
-$sql = "SELECT Title FROM Games WHERE GameID ='".$gameID."'";
+$sql = "SELECT * FROM Games WHERE GameID ='".$gameID."'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
