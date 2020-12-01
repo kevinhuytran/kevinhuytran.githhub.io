@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$gameID = $_GET['GameID'];
+$sql = "SELECT Title FROM Games WHERE GameID ='".$gameID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,38 +58,38 @@
     </nav>
 </header>
 <main class="container-md">
-    <?php
-    require("connect.php");
-    $gameID = $_GET['GameID'];
-    $sql = "SELECT Title FROM Games WHERE GameID ='".$gameID."'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
-    $conn->close();
-    ?>
-    <div class="container-fluid">
-        <?php
-        require("connect.php");
-        $gameID = $_GET['GameID'];
-        $sql = "SELECT ImagePath FROM Games WHERE GameID ='".$gameID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        echo "<img src='" . $row['ImagePath'] . "' class='img-fluid mx-auto d-block'>";
-        $conn->close();
-        ?>
-    </div>
-    <div class="container-fluid mt-3 border-top">
-        <h2>Description</h2>
-        <?php
-        require("connect.php");
-        $gameID = $_GET['GameID'];
-        $sql = "SELECT GameDesc FROM Games WHERE GameID ='".$gameID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        echo $row['GameDesc'];
-        $conn->close();
-        ?>
-    </div>
+    <h1>Submit a Game Profile!</h1>
+    <form action="insertGame.php"
+          enctype="multipart/form-data"
+          method="post"
+          onsubmit="return validateForm(
+              document.getElementById('gameTitle'),
+              document.getElementById('gameDesc'),
+              document.getElementById('gameTags')
+              )
+    ">
+        <div class="form-group">
+            <label for="gameTitle">Game Title</label>
+            <input type="text" class="form-control" id="gameTitle" name="gameTitle" value="<?php echo $row['Title']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="gameImage">Image</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameImage" name="gameImage" value="<?php echo $row['ImagePath']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="gameIcon">Icon</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameIcon" name="gameIcon" value="<?php echo $row['IconPath']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="gameDesc">Description</label>
+            <textarea class="form-control" id="gameDesc" rows="5" name="gameDesc" style="white-space: pre-line;"><?php echo $row['GameDesc']; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="gameTags">Tags</label>
+            <input type="text" class="form-control" id="gameTags" name="gameTags" value="<?php echo $row['Tags']; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </main>
 </body>
 </html>
