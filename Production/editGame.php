@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$gameID = $_GET['GameID'];
+$sql = "SELECT * FROM Games WHERE GameID ='".$gameID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,68 +57,47 @@
         </div>
     </nav>
 </header>
-<main class="container-sm">
-    <?php
-    include("connect.php");
-    function create_image(&$image, $title) {
-        $fileName = $image['name'];
-        $fileTmpName = $image['tmp_name'];
-        $fileSize = $image['size'];
-        $fileError = $image['error'];
-        // $fileType = $image['type'];
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
-
-        $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-
-        $fileDestination = 'images/game-default.png';
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 1000000) {
-                    $fileNameNew = $title.".".$fileActualExt;
-                    $fileDestination = 'images/'.$fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    echo "File uploaded successfully<br>";
-                } else {
-                    echo "File is bigger than 1MB!<br>";
-                }
-            } else {
-                echo "Error uploading the file<br>";
-            }
-        } else {
-            echo "You cannot upload files of this type<br>";
-        }
-        return $fileDestination;
-    }
-    if(isset($_POST['submit'])) {
-        echo "We have received your input!<br>";
-        echo "Here is the following:<br>";
-    }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
-    $teamName = $_POST['teamName'];
-    $teamDesc = nl2br($_POST['teamDesc']);
-    $teamImage = $_FILES['teamImage'];
-    $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
-    ?>
-    <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
-    <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
+<main class="container-md">
+    <h1>Submit a Game Profile!</h1>
+    <form action="updateGame.php?GameID=<?php echo $gameID; ?>"
+          enctype="multipart/form-data"
+          method="post"
+          onsubmit="return validateForm(
+              document.getElementById('gameTitle'),
+              document.getElementById('gameDesc'),
+              document.getElementById('gameTags')
+              )
+    ">
+        <div class="form-group">
+            <label for="gameTitle">Game Title</label>
+            <input type="text" class="form-control" id="gameTitle" name="gameTitle" value="<?php echo $row['Title']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="gameImage">Image</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameImage" name="gameImage">
+        </div>
+        <div class="form-group">
+            <label for="gameIcon">Icon</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameIcon" name="gameIcon">
+        </div>
+        <div class="form-group">
+            <label for="gameDesc">Description</label>
+            <textarea class="form-control" id="gameDesc" rows="5" name="gameDesc" style="white-space: pre-line;">
+                <?php
+                $gameDesc = $row['GameDesc'];
+                $breaks = array("<br />","<br>","<br/>");
+                $gameDesc = str_ireplace($breaks, "\r\n", $gameDesc);
+                echo $gameDesc;
+                ?>
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="gameTags">Tags</label>
+            <input type="text" class="form-control" id="gameTags" name="gameTags" value="<?php echo $row['Tags']; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </main>
 </body>
 </html>
+

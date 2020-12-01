@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("main img").hover(function(){
+                $(this).css("transition", "transform .3s");
+                $(this).css("transform", "scale(1.15)");
+            }, function(){
+                $(this).css("transform", "scale(1)");
+            });
+        });
+    </script>
     <style>
         header {
             font-family: "DejaVu Sans Mono", sans-serif;
@@ -34,7 +44,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="listGames.php">Games</a>
+                    <a class="nav-link" href=".">Games</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="listPlayers.php">Players</a>
@@ -49,68 +59,26 @@
         </div>
     </nav>
 </header>
-<main class="container-sm">
-    <?php
-    include("connect.php");
-    function create_image(&$image, $title) {
-        $fileName = $image['name'];
-        $fileTmpName = $image['tmp_name'];
-        $fileSize = $image['size'];
-        $fileError = $image['error'];
-        // $fileType = $image['type'];
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
-
-        $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-
-        $fileDestination = 'images/game-default.png';
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 1000000) {
-                    $fileNameNew = $title.".".$fileActualExt;
-                    $fileDestination = 'images/'.$fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    echo "File uploaded successfully<br>";
-                } else {
-                    echo "File is bigger than 1MB!<br>";
-                }
-            } else {
-                echo "Error uploading the file<br>";
+<main class="container-md">
+    <h2>Games</h2>
+    <div class="row">
+        <?php
+        include("connect.php");
+        $sql = "SELECT GameID, Title, ImagePath FROM Games";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='col-md-4'><div class='thumbnail'>";
+                echo "<a href='viewGame.php?GameID=" . $row['GameID'] . "'><img src='" . $row['ImagePath'] . "' alt='Game Photo' style='width:100%'" . "</a>";
+                echo "</div></div>";
             }
         } else {
-            echo "You cannot upload files of this type<br>";
+            echo "There are no games available at the moment. Please try again later.";
         }
-        return $fileDestination;
-    }
-    if(isset($_POST['submit'])) {
-        echo "We have received your input!<br>";
-        echo "Here is the following:<br>";
-    }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
-    $teamName = $_POST['teamName'];
-    $teamDesc = nl2br($_POST['teamDesc']);
-    $teamImage = $_FILES['teamImage'];
-    $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
-    ?>
-    <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
-    <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
+        $conn->close();
+        ?>
+    </div>
 </main>
 </body>
 </html>

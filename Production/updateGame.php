@@ -11,6 +11,10 @@
         header {
             font-family: "DejaVu Sans Mono", sans-serif;
         }
+        .px-md-5 {
+            padding-left: 5rem !important;
+            padding-right: 5rem !important;
+        }
     </style>
 </head>
 <body>
@@ -88,28 +92,42 @@
         echo "We have received your input!<br>";
         echo "Here is the following:<br>";
     }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
-    $teamName = $_POST['teamName'];
-    $teamDesc = nl2br($_POST['teamDesc']);
-    $teamImage = $_FILES['teamImage'];
-    $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
+    $gameID = $_GET['GameID'];
+    $gameTitle = $_POST['gameTitle'];
+    $gameImage = $_FILES['gameImage'];
+    $gameIcon = $_FILES['gameIcon'];
+    $gameDesc = nl2br($_POST['gameDesc']);
+    $gameTags = $_POST['gameTags'];
+    if($gameImage['name'] !== '') {
+        $gameNewImage = create_image($gameImage,$gameTitle);
+        $sql="UPDATE Games SET ImagePath='" . $gameNewImage . "' WHERE GameID='" . $gameID ."'";
+        if ($conn->query($sql) === TRUE) {
+            echo "New image uploaded successfully <br>";
+        } else {
+            echo "Upload Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    if($gameIcon['name'] !== '') {
+        $gameNewIcon = create_image($gameIcon,"$gameTitle".'ICON');
+        $sql="UPDATE Games SET IconPath='" . $gameNewIcon . "' WHERE GameID='" . $gameID ."'";
+        if ($conn->query($sql) === TRUE) {
+            echo "New icon uploaded successfully <br>";
+        } else {
+            echo "Upload Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    $sql = "UPDATE Games SET Title='" . $gameTitle . "', GameDesc='" . $gameDesc . "', Tags='" . $gameTags . "' WHERE GameID='" . $gameID ."'";
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
+        echo "New record created successfully <br>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+    echo "<p>Game Title: $gameTitle</p>";
+    echo "<p>Description: $gameDesc</p>>";
+    echo "<p>Tags: $gameTags</p>";
     $conn->close();
     ?>
-    <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
+    <a href="gameForm.html"><button class="btn btn-primary">Insert Another Game</button></a>
     <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
 </main>
 </body>

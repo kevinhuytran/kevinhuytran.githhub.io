@@ -37,7 +37,7 @@
                     <a class="nav-link" href="listGames.php">Games</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="listPlayers.php">Players</a>
+                    <a class="nav-link" href=".">Players</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="listSponsors.php">Sponsors</a>
@@ -49,68 +49,25 @@
         </div>
     </nav>
 </header>
-<main class="container-sm">
-    <?php
-    include("connect.php");
-    function create_image(&$image, $title) {
-        $fileName = $image['name'];
-        $fileTmpName = $image['tmp_name'];
-        $fileSize = $image['size'];
-        $fileError = $image['error'];
-        // $fileType = $image['type'];
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
-
-        $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-
-        $fileDestination = 'images/game-default.png';
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 1000000) {
-                    $fileNameNew = $title.".".$fileActualExt;
-                    $fileDestination = 'images/'.$fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    echo "File uploaded successfully<br>";
-                } else {
-                    echo "File is bigger than 1MB!<br>";
-                }
-            } else {
-                echo "Error uploading the file<br>";
+<main class="container-md">
+    <h2>Players</h2>
+    <div class="list-group">
+        <?php
+        include("connect.php");
+        $sql = "SELECT PlayerID, InGameName FROM Players";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                $PlayerID = $row['PlayerID'];
+                echo "<a href='viewPlayer.php?PlayerID=" . $PlayerID . "' class='list-group-item list-group-item-action'>" . $row["InGameName"] . "</a>";
             }
         } else {
-            echo "You cannot upload files of this type<br>";
+            echo "There are no players available at the moment. Please try again later.";
         }
-        return $fileDestination;
-    }
-    if(isset($_POST['submit'])) {
-        echo "We have received your input!<br>";
-        echo "Here is the following:<br>";
-    }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
-    $teamName = $_POST['teamName'];
-    $teamDesc = nl2br($_POST['teamDesc']);
-    $teamImage = $_FILES['teamImage'];
-    $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
-    ?>
-    <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
-    <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
+        $conn->close();
+        ?>
+    </div>
 </main>
 </body>
 </html>

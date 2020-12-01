@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$gameID = $_GET['GameID'];
+$sql = "SELECT * FROM Games WHERE GameID ='".$gameID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,68 +57,23 @@
         </div>
     </nav>
 </header>
-<main class="container-sm">
+<main class="container-md">
     <?php
-    include("connect.php");
-    function create_image(&$image, $title) {
-        $fileName = $image['name'];
-        $fileTmpName = $image['tmp_name'];
-        $fileSize = $image['size'];
-        $fileError = $image['error'];
-        // $fileType = $image['type'];
-
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
-
-        $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-
-        $fileDestination = 'images/game-default.png';
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 1000000) {
-                    $fileNameNew = $title.".".$fileActualExt;
-                    $fileDestination = 'images/'.$fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    echo "File uploaded successfully<br>";
-                } else {
-                    echo "File is bigger than 1MB!<br>";
-                }
-            } else {
-                echo "Error uploading the file<br>";
-            }
-        } else {
-            echo "You cannot upload files of this type<br>";
-        }
-        return $fileDestination;
-    }
-    if(isset($_POST['submit'])) {
-        echo "We have received your input!<br>";
-        echo "Here is the following:<br>";
-    }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
-    $teamName = $_POST['teamName'];
-    $teamDesc = nl2br($_POST['teamDesc']);
-    $teamImage = $_FILES['teamImage'];
-    $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully<br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
+    echo "<a href='editGame.php?GameID=" . $gameID . "'><button>Edit</button></a>";
+    echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
     ?>
-    <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
-    <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
+    <div class="container-fluid">
+    <?php
+    echo "<img src='" . $row['ImagePath'] . "' class='img-fluid mx-auto d-block'>";
+    ?>
+    </div>
+    <div class="container-fluid mt-3 border-top">
+        <h2>Description</h2>
+        <?php
+        echo $row['GameDesc'];
+        ?>
+    </div>
 </main>
 </body>
 </html>
+
