@@ -98,25 +98,25 @@
     $gameIcon = $_FILES['gameIcon'];
     $gameDesc = nl2br($_POST['gameDesc']);
     $gameTags = $_POST['gameTags'];
-    if(isset($_FILES['gameImage'])) {
+    if($gameImage['name'] !== '') {
         $gameNewImage = create_image($gameImage,$gameTitle);
-        $sql="UPDATE GAME SET ImagePath='" . $gameNewImage . "' WHERE GameID='" . $gameID ."'";
+        $sql="UPDATE Games SET ImagePath='" . $gameNewImage . "' WHERE GameID='" . $gameID ."'";
         if ($conn->query($sql) === TRUE) {
             echo "New image uploaded successfully <br>";
         } else {
             echo "Upload Error: " . $sql . "<br>" . $conn->error;
         }
     }
-    if(isset($_FILES['gameIcon'])) {
+    if($gameIcon['name'] !== '') {
         $gameNewIcon = create_image($gameIcon,"$gameTitle".'ICON');
-        $sql="UPDATE GAME SET IconPath='" . $gameNewIcon . "' WHERE GameID='" . $gameID ."'";
+        $sql="UPDATE Games SET IconPath='" . $gameNewIcon . "' WHERE GameID='" . $gameID ."'";
         if ($conn->query($sql) === TRUE) {
             echo "New icon uploaded successfully <br>";
         } else {
             echo "Upload Error: " . $sql . "<br>" . $conn->error;
         }
     }
-    $sql = "UPDATE GAME SET Title='" . $gameTitle . "', GameDesc='" . $gameDesc . "', Tags='" . $gameTags . "' WHERE GameID='" . $gameID ."'";
+    $sql = "UPDATE Games SET Title='" . $gameTitle . "', GameDesc='" . $gameDesc . "', Tags='" . $gameTags . "' WHERE GameID='" . $gameID ."'";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully <br>";
     } else {
