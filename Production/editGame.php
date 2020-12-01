@@ -4,6 +4,7 @@ $gameID = $_GET['GameID'];
 $sql = "SELECT * FROM Games WHERE GameID ='".$gameID."'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
