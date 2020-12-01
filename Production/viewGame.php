@@ -56,7 +56,7 @@
     $sql = "SELECT Title FROM Games WHERE GameID ='".$gameID."'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    echo "<a href='editGame.php?GameID=" . $row['GameID'] . "'><button>Edit</button></a>";
+    echo "<a href='editGame.php?GameID=" . $gameID . "'><button>Edit</button></a>";
     echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
     $conn->close();
     ?>
