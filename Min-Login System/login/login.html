@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">    
+        <link rel='stylesheet' href='header.css'/>
+        
+        <title>log-in</title>
+
+        <script type="text/JavaScript">
+             function Validator(elem1, elem2, helperMsg) {
+                var nameExp = /^[0-9A-Za-z]+$/;
+                if (elem1.value.match(nameExp) && elem2.value.match(nameExp)){
+                    return true;
+                }
+                
+                else{
+                    alert(helperMsg);
+                    elem.focus();
+                    return false;
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <header>
+            <nav>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Square%2C_Inc._-_Square_logo.svg" alt="temp-logo">
+                <div class="categories">
+                    <a href='#'>Games</a>
+                    <a href='#'>Players</a>
+                    <a href='#'>Teams</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div>
+                <form action="login.php" method="post">
+                    <div class="container">
+                        <h1>Log In</h1>
+                        <p>Enter your Username/Password in order to login!</p>
+                        <hr>
+
+
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" id="username" name="username" required>
+                    
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" id="password" name="password" required>
+                            
+                        <button onclick="Validator(document.getElementById('username'), document.getElementById('password'), 'Invalid Format!')" type="submit">Login</button><br><br>
+
+                        <a href="signup.html">Don't have one yet? Click here and enjoy all contents of ours for free!</a>
+
+                    </div>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
