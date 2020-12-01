@@ -59,7 +59,7 @@ $conn->close();
 </header>
 <main class="container-md">
     <h1>Submit a Game Profile!</h1>
-    <form action="insertGame.php"
+    <form action="updateGame.php?GameID=<?php echo $gameID; ?>"
           enctype="multipart/form-data"
           method="post"
           onsubmit="return validateForm(
@@ -74,11 +74,11 @@ $conn->close();
         </div>
         <div class="form-group">
             <label for="gameImage">Image</label>
-            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameImage" name="gameImage" value="<?php echo $row['ImagePath']; ?>">
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameImage" name="gameImage">
         </div>
         <div class="form-group">
             <label for="gameIcon">Icon</label>
-            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameIcon" name="gameIcon" value="<?php echo $row['IconPath']; ?>">
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="gameIcon" name="gameIcon">
         </div>
         <div class="form-group">
             <label for="gameDesc">Description</label>
