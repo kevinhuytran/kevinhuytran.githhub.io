@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$gameID = $_GET['GameID'];
+$sql = "SELECT * FROM Games WHERE GameID ='".$gameID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,36 +59,18 @@
 </header>
 <main class="container-md">
     <?php
-    require("connect.php");
-    $gameID = $_GET['GameID'];
-    $sql = "SELECT Title FROM Games WHERE GameID ='".$gameID."'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
     echo "<a href='editGame.php?GameID=" . $gameID . "'><button>Edit</button></a>";
     echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
-    $conn->close();
     ?>
     <div class="container-fluid">
-        <?php
-        require("connect.php");
-        $gameID = $_GET['GameID'];
-        $sql = "SELECT ImagePath FROM Games WHERE GameID ='".$gameID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        echo "<img src='" . $row['ImagePath'] . "' class='img-fluid mx-auto d-block'>";
-        $conn->close();
-        ?>
+    <?php
+    echo "<img src='" . $row['ImagePath'] . "' class='img-fluid mx-auto d-block'>";
+    ?>
     </div>
     <div class="container-fluid mt-3 border-top">
         <h2>Description</h2>
         <?php
-        require("connect.php");
-        $gameID = $_GET['GameID'];
-        $sql = "SELECT GameDesc FROM Games WHERE GameID ='".$gameID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo $row['GameDesc'];
-        $conn->close();
         ?>
     </div>
 </main>
