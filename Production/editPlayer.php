@@ -1,7 +1,7 @@
 <?php
 require("connect.php");
 $playerID = $_GET['PlayerID'];
-$sql = "SELECT * FROM Players WHERE PlayerID ='". $playerID ."'";
+$sql = "SELECT * FROM Players WHERE PlayerID ='".$playerID."'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $conn->close();
@@ -78,8 +78,8 @@ $conn->close();
                 $sql = "SELECT GameID, Title FROM Games";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row['GameID']."'>".$row['Title']."</option>";
+                    while($gameRow = $result->fetch_assoc()) {
+                        echo "<option value='".$gameRow['GameID']."'>".$gameRow['Title']."</option>";
                     }
                 } else {
                     echo "0 results";
@@ -96,8 +96,8 @@ $conn->close();
                 $sql = "SELECT TeamID, TeamName FROM Teams";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option value='".$row['TeamID']."'>".$row['TeamName']."</option>";
+                    while($teamRow = $result->fetch_assoc()) {
+                        echo "<option value='".$teamRow['TeamID']."'>".$teamRow['TeamName']."</option>";
                     }
                 } else {
                     echo "0 results";
