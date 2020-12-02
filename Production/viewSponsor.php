@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$sponsorID = $_GET['SponsorID'];
+$sql = "SELECT * FROM Sponsors WHERE SponsorID ='" . $sponsorID . "'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,35 +59,18 @@
 </header>
 <main class="container-md">
     <?php
-    require("connect.php");
-    $sponsorID = $_GET['SponsorID'];
-    $sql = "SELECT Name FROM Sponsors WHERE SponsorID ='" . $sponsorID . "'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+    echo "<a href='editSponsor.php?SponsorID=" . $sponsorID . "'><button class='btn btn-primary'>Edit</button></a>";
     echo "<h1 style='text-align: center'>" . $row['Name'] . "</h1>";
-    $conn->close();
     ?>
     <div class="container-fluid">
         <?php
-        require("connect.php");
-        $sponsorID = $_GET['SponsorID'];
-        $sql = "SELECT Imagepath FROM Sponsors WHERE SponsorID ='" . $sponsorID . "'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo "<img src='" . $row['Imagepath'] . "' class='img-fluid mx-auto d-block'>";
-        $conn->close();
         ?>
     </div>
     <div class="container-fluid mt-3 border-top">
         <h2>Description</h2>
         <?php
-        require("connect.php");
-        $sponsorID = $_GET['SponsorID'];
-        $sql = "SELECT SponsorDesc FROM Sponsors WHERE SponsorID ='" . $sponsorID . "'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo $row['SponsorDesc'];
-        $conn->close();
         ?>
     </div>
 </main>
