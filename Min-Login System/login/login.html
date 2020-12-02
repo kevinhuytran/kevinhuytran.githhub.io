@@ -9,20 +9,7 @@
         
         <title>log-in</title>
 
-        <script type="text/JavaScript">
-             function Validator(elem1, elem2, helperMsg) {
-                var nameExp = /^[0-9A-Za-z]+$/;
-                if (elem1.value.match(nameExp) && elem2.value.match(nameExp)){
-                    return true;
-                }
-                
-                else{
-                    alert(helperMsg);
-                    elem.focus();
-                    return false;
-                }
-            }
-        </script>
+        <script src="validation.js"></script>
     </head>
 
     <body>
@@ -40,7 +27,11 @@
 
         <main>
             <div>
-                <form action="login.php" method="post">
+                <form action="login.php" method="post"
+                onsubmit="return Validator(
+                    document.getElementById('username'),
+                    document.getElementById('password'))">
+                    
                     <div class="container">
                         <h1>Log In</h1>
                         <p>Enter your Username/Password in order to login!</p>
@@ -53,7 +44,7 @@
                         <label for="psw"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" id="password" name="password" required>
                             
-                        <button onclick="Validator(document.getElementById('username'), document.getElementById('password'), 'Invalid Format!')" type="submit">Login</button><br><br>
+                        <button type="submit">Login</button><br><br>
 
                         <a href="signup.html">Don't have one yet? Click here and enjoy all contents of ours for free!</a>
 
