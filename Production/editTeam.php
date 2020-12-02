@@ -107,7 +107,7 @@ $conn->close();
         </div>
         <div class="form-group">
             <label for="teamName">Team Name</label>
-            <input type="text" class="form-control" id="teamName" name="teamName">
+            <input type="text" class="form-control" id="teamName" name="teamName" value="<?php echo $row['TeamName']; ?>">
         </div>
         <div class="form-group">
             <label for="teamImage">Image</label>
@@ -115,11 +115,18 @@ $conn->close();
         </div>
         <div class="form-group">
             <label for="teamDesc">Description</label>
-            <textarea class="form-control" id="teamDesc" rows="5" name="teamDesc" style="white-space: pre-line;"></textarea>
+            <textarea class="form-control" id="teamDesc" rows="5" name="teamDesc" style="white-space: pre-line;">
+                <?php
+                $teamDesc = $row['TeamDesc'];
+                $breaks = array("<br />","<br>","<br/>");
+                $teamDesc = str_ireplace($breaks, "\r\n", $teamDesc);
+                echo $teamDesc;
+                ?>
+            </textarea>
         </div>
         <div class="form-group">
             <label for="teamTags">Tags</label>
-            <input type="text" class="form-control" id="teamTags" name="teamTags">
+            <input type="text" class="form-control" id="teamTags" name="teamTags" value="<?php echo $row['Tags']; ?>">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
