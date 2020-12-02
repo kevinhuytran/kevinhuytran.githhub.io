@@ -60,7 +60,7 @@ $conn->close();
 </header>
 <main class="container-md">
     <h1>Submit a Team Profile!</h1>
-    <form action="insertTeam.php"
+    <form action="updateTeam.php?TeamID=<?php echo $teamID; ?>"
           enctype="multipart/form-data"
           method="post"
           onsubmit="return validateForm(
