@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$playerID = $_GET['PlayerID'];
+$sql = "SELECT * FROM Players WHERE PlayerID ='".$playerID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,55 +58,34 @@
     </nav>
 </header>
 <main class="container-md">
+    <?php
+    echo "<a href='editPlayer.php?PlayerID=" . $playerID . "'><button class='btn btn-primary'>Edit</button></a>";
+    ?>
     <div class="d-md-flex border">
         <div class="img-fluid mx-auto" style="max-width: 300px">
         <?php
-        require("connect.php");
-        $playerID = $_GET['PlayerID'];
-        $sql = "SELECT * FROM Players WHERE PlayerID ='".$playerID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo "<img src='" . $row['ImagePath'] . "' class='img-fluid'>";
-        $conn->close();
         ?>
         </div>
         <div class="container-fluid p-md-5">
             <?php
-            require("connect.php");
-            $playerID = $_GET['PlayerID'];
-            $sql = "SELECT * FROM Players WHERE PlayerID ='".$playerID."'";
-            $result = $conn->query($sql);
-            $row = $result->fetch_assoc();
             echo " In-Game Name: " . $row['InGameName'] . "<br>";
             echo "  Actual Name: " . $row['FullName'] . "<br>";
             echo "      Country: " . $row['Country'] . "<br>";
             echo "Date of Birth: " . $row['DOB'] . "<br>";
-            $conn->close();
             ?>
         </div>
     </div>
     <div class="container-fluid mt-3 border-top">
         <h2>Description</h2>
         <?php
-        require("connect.php");
-        $playerID = $_GET['PlayerID'];
-        $sql = "SELECT PlayerDesc FROM Players WHERE PlayerID ='".$playerID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo $row['PlayerDesc'];
-        $conn->close();
         ?>
     </div>
     <div class="container-fluid mt-3 border-top">
         <h2>Settings</h2>
         <?php
-        require("connect.php");
-        $playerID = $_GET['PlayerID'];
-        $sql = "SELECT Settings FROM Players WHERE PlayerID ='".$playerID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo $row['Settings'];
-        $conn->close();
         ?>
     </div>
 </main>
