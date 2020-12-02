@@ -88,25 +88,38 @@
         echo "We have received your input!<br>";
         echo "Here is the following:<br>";
     }
-    $gameID = (int)$_POST['Game'];
-    $sponsorID = (int)$_POST['Sponsor'];
+    $teamID = $_GET['TeamID'];
+    $gameID = $_POST['Game'];
+    $sponsorID = $_POST['Sponsor'];
     $teamName = $_POST['teamName'];
     $teamDesc = nl2br($_POST['teamDesc']);
     $teamImage = $_FILES['teamImage'];
     $teamTags = $_POST['teamTags'];
-    $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
-    echo "Game ID: " . $gameID . "<br>";
-    echo "Sponsor ID: " . $sponsorID . "<br>";
-    echo "Team Name: " . $teamName . "<br>";
-    echo "Team Description: " . $teamDesc . "<br>";
-    echo "Team Tags: " . $teamTags . "<br>";
-    $sql = "INSERT INTO Teams (GameID, SponsorID, TeamName, ImagePath, TeamDesc, Tags)
-        VALUES ($gameID, $sponsorID, '$teamName','$teamNewImage','$teamDesc','$teamTags')";
+    if($teamImage['name'] !== '') {
+        $teamNewImage = create_image($teamImage,'TEAM-' . $gameID . '-' . $teamName);
+        $sql="UPDATE Teams SET ImagePath='" . $teamNewImage . "' WHERE TeamID='" . $teamID ."'";
+        if ($conn->query($sql) === TRUE) {
+            echo "New image uploaded successfully <br>";
+        } else {
+            echo "Upload Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    $sql = "UPDATE Teams SET GameID='" . $gameID . "',
+                             SponsorID='" . $sponsorID . "',
+                             TeamName='" . $teamName . "',
+                             TeamDesc='" . $teamDesc . "',
+                             Tags='" . $teamTags . "',
+                             WHERE TeamID='" . $teamID ."'";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully<br>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+    echo "Game ID: " . $gameID . "<br>";
+    echo "Sponsor ID: " . $sponsorID . "<br>";
+    echo "Team Name: " . $teamName . "<br>";
+    echo "Team Description: " . $teamDesc . "<br>";
+    echo "Team Tags: " . $teamTags . "<br>";
     $conn->close();
     ?>
     <a href="teamForm.php"><button class="btn btn-primary">Insert Another Team</button></a>
