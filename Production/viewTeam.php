@@ -1,3 +1,11 @@
+<?php
+require("connect.php");
+$teamID = $_GET['TeamID'];
+$sql = "SELECT * FROM Teams WHERE TeamID ='".$teamID."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,35 +59,17 @@
 </header>
 <main class="container-md">
     <?php
-    require("connect.php");
-    $teamID = $_GET['TeamID'];
-    $sql = "SELECT TeamName FROM Teams WHERE TeamID ='".$teamID."'";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
     echo "<h1 style='text-align: center'>" . $row['TeamName'] . "</h1>";
-    $conn->close();
     ?>
     <div class="container-fluid">
         <?php
-        require("connect.php");
-        $teamID = $_GET['TeamID'];
-        $sql = "SELECT * FROM Teams WHERE TeamID ='".$teamID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo "<img src='" . $row['ImagePath'] . "' class='img-fluid mx-auto d-block'>";
-        $conn->close();
         ?>
     </div>
     <div class="container-fluid mt-3 border-top">
         <h2>Description</h2>
         <?php
-        require("connect.php");
-        $teamID = $_GET['TeamID'];
-        $sql = "SELECT TeamDesc FROM Teams WHERE TeamID ='".$teamID."'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
         echo $row['TeamDesc'];
-        $conn->close();
         ?>
     </div>
 </main>
