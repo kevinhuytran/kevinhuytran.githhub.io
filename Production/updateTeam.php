@@ -89,8 +89,8 @@
         echo "Here is the following:<br>";
     }
     $teamID = $_GET['TeamID'];
-    $gameID = $_POST['Game'];
-    $sponsorID = $_POST['Sponsor'];
+    $gameID = (int)$_POST['Game'];
+    $sponsorID = (int)$_POST['Sponsor'];
     $teamName = $_POST['teamName'];
     $teamDesc = nl2br($_POST['teamDesc']);
     $teamImage = $_FILES['teamImage'];
@@ -108,7 +108,7 @@
                              SponsorID='" . $sponsorID . "',
                              TeamName='" . $teamName . "',
                              TeamDesc='" . $teamDesc . "',
-                             Tags='" . $teamTags . "',
+                             Tags='" . $teamTags . "'
                              WHERE TeamID='" . $teamID ."'";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully<br>";
