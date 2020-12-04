@@ -1,20 +1,5 @@
 <?php
-$servername = "localhost";
-$username1 = "root";
-$password = "ZQMgH1SFiWal";
-$dbname = "EsportsEncyclopedia";
-
-// Create connection
-$conn = new mysqli($servername, $username1, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-else {
-    echo "Connected successfully<br><br>";
-}
+include("connect.php");
 
 //Program ---------------------------------------------------------------
 
@@ -26,22 +11,17 @@ echo "Username: ".$username. "<br>";
 echo "Password: ".$password1. "<br>";
 echo "Password-repeat: ".$password2. "<br>";
 
-
-$insertsql = "INSERT INTO Users(Username, Password) VALUES ($username, $password1)";
-
-$selectsql = "SELECT Username, Password FROM Users WHERE Username='$username' AND Password='$password1'";
+$selectsql = "SELECT Username FROM Users WHERE Username='$username'";
 $result = $conn->query($selectsql);
-
-
-
-
 if ($result->num_rows > 0){
-    echo "This Username/Password is already taken! Please use other Username/Password!";
+    echo "This Username is already taken! Please use other Username";
+    sleep(3);
+    header("Location: retry.html");
 }
 
-else (mysqli_query($conn,$insertsql)){
-    echo "Successfuly signed up! <br>";
+$sql = "INSERT INTO Users(Username, Password) VALUES ('$username', '$password1')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully <br>";
+    header("Location: index.html");
 }
-
-
-?>
