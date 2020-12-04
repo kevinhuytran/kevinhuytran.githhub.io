@@ -60,6 +60,7 @@ $conn->close();
 <main class="container-md">
     <?php
     echo "<a href='editPlayer.php?PlayerID=" . $playerID . "'><button class='btn btn-primary'>Edit</button></a>";
+    echo "<a href='deletePlayer.php?PlayerID=" . $playerID . "'><button class='btn btn-primary'>Edit</button></a>";
     ?>
     <div class="d-md-flex border">
         <div class="img-fluid mx-auto" style="max-width: 300px">
