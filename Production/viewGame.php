@@ -60,6 +60,7 @@ $conn->close();
 <main class="container-md">
     <?php
     echo "<a href='editGame.php?GameID=" . $gameID . "'><button class='btn btn-primary'>Edit</button></a>";
+    echo "<a href='deleteGame.php?GameID=" . $gameID . "'><button class='btn btn-primary'>Delete</button></a>";
     echo "<h1 style='text-align: center'>" . $row['Title'] . "</h1>";
     ?>
     <div class="container-fluid">
