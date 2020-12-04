@@ -57,13 +57,12 @@
     <?php
     include("connect.php");
     $playerID = $_GET['PlayerID'];
-    $query = "DELETE FROM Players WHERE PlayerID=$gameID";
+    $query = "DELETE FROM Players WHERE PlayerID=$playerID";
     $result = mysqli_query($conn, $query) or die (mysqli_error());
     echo $result;
     header("Location: index.html");
     $conn->close();
     ?>
-    <a href="index.html"><button class="btn btn-primary">Return Home</button></a>
 </main>
 </body>
 </html>
