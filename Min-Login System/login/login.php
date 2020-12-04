@@ -13,8 +13,11 @@ if ($conn->connect_error) {
 }
 
 else {
-    echo "Connected successfully<br>";
+    echo "Connected successfully<br><br>";
 }
+
+//Program
+
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -22,14 +25,16 @@ $password = $_POST['password'];
 echo "Username: ".$username. "<br>";
 echo "Password: ".$password. "<br>";
 
-$sql="SELECT Username, Password FROM Users WHERE Username=$username, Password=$password";
-$result=$conn->query($sql);
 
-if ($result->num_rows == 0){
-	echo "No Existing User! No matching Username/Password!";
+$sql = "SELECT Username, Password FROM Users WHERE Username='$username' AND Password='$password'";
+$result = $conn->query($sql);
 
-    else{
-		echo "Successfully login!"
-    }
+
+if ($result->num_rows > 0){
+    echo "Successfully logged in! Enjoy our service!";
 }
+else{
+    echo "There is no signed up user with this Username/Password!";
+}
+
 ?>

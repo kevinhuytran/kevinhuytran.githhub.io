@@ -13,8 +13,10 @@ if ($conn->connect_error) {
 }
 
 else {
-    echo "Connected successfully<br>";
+    echo "Connected successfully<br><br>";
 }
+
+//Program ---------------------------------------------------------------
 
 $username = $_POST['username'];
 $password1 = $_POST['password'];
@@ -25,32 +27,21 @@ echo "Password: ".$password1. "<br>";
 echo "Password-repeat: ".$password2. "<br>";
 
 
-$result = $conn->query("SELECT Username FROM Users WHERE Username=$username")
+$insertsql = "INSERT INTO Users(Username, Password) VALUES ($username, $password1)";
 
-if ($result->num_rows == 0){
-    $sql = "INSERT INTO Users(Username, Password) VALUES (\"$username\", \"$password\");";
+$selectsql = "SELECT Username, Password FROM Users WHERE Username='$username' AND Password='$password1'";
+$result = $conn->query($selectsql);
 
-    else{
-        echo "Username is already occupied! Try different username!"
-    }
+
+
+
+if ($result->num_rows > 0){
+    echo "This Username/Password is already taken! Please use other Username/Password!";
 }
 
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully<br>";
-} 
-else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+else (mysqli_query($conn,$insertsql)){
+    echo "Successfuly signed up! <br>";
 }
 
-$sql = "SELECT Username, Password FROM Users";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "Username: " . $row["Username"]. " - Password: " . $row["Password"] . "<br>";
-    }
-} else {
-    echo "0 results";
-}
 ?>
