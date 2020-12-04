@@ -60,6 +60,7 @@ $conn->close();
 <main class="container-md">
     <?php
     echo "<a href='editTeam.php?TeamID=" . $teamID . "'><button class='btn btn-primary'>Edit</button></a>";
+    echo "<a href='deleteTeam.php?TeamID=" . $teamID . "'><button class='btn btn-primary'>Delete</button></a>";
     echo "<h1 style='text-align: center'>" . $row['TeamName'] . "</h1>";
     ?>
     <div class="container-fluid">
