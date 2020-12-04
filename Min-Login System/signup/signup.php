@@ -27,21 +27,24 @@ echo "Password: ".$password1. "<br>";
 echo "Password-repeat: ".$password2. "<br>";
 
 
-$insertsql = "INSERT INTO Users(Username, Password) VALUES ($username, $password1)";
+$insertsql = "INSERT INTO Users(Username, Password) VALUES ('$username', '$password1')";
 
-$selectsql = "SELECT Username, Password FROM Users WHERE Username='$username' AND Password='$password1'";
+$selectsql = "SELECT Username, Password FROM Users WHERE Username='$username'";
 $result = $conn->query($selectsql);
 
 
-
-
 if ($result->num_rows > 0){
-    echo "This Username/Password is already taken! Please use other Username/Password!";
+    echo "This Username is already taken! Please use other Username!";
+    header("Location: http://3.230.1.132/retrySignup.html");
 }
 
-else (mysqli_query($conn,$insertsql)){
-    echo "Successfuly signed up! <br>";
+else if ($conn->query($insertsql) === TRUE) {
+    echo "New record created successfully<br>"; 
+    header("Location: http://3.230.1.132/login.html");
 }
 
+else{
+    echo "Error: ".$sql."<br>".mysqli_error($conn);
+}
 
 ?>

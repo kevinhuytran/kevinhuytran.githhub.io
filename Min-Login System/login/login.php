@@ -32,9 +32,12 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0){
     echo "Successfully logged in! Enjoy our service!";
+    header("Location: http://3.230.1.132/index.html");
 }
 else{
     echo "There is no signed up user with this Username/Password!";
+    header("Location: http://3.230.1.132/retryLogin.html");
+
 }
 
 ?>
