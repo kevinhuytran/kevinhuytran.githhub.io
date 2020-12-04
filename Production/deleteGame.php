@@ -56,11 +56,6 @@
 <main class="container-sm">
     <?php
     include("connect.php");
-    if(isset($_POST['submit'])) {
-        echo "We have received your input!<br>";
-        echo "Here is the following:<br>";
-    }
-    require('db.php');
     $gameID = $_GET['GameID'];
     $query = "DELETE FROM Games WHERE GameID=$gameID";
     $result = mysqli_query($conn, $query) or die (mysqli_error());
