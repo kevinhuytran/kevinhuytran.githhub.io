@@ -20,6 +20,7 @@ $conn->close();
             font-family: "DejaVu Sans Mono", sans-serif;
         }
     </style>
+    <script src="validateSponsorForm.js"></script>
 </head>
 <body>
 <header>
@@ -37,7 +38,7 @@ $conn->close();
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="gameForm.html">Add Game</a>
                         <a class="dropdown-item" href="playerForm.php">Add Player</a>
-                        <a class="dropdown-item" href="sponsorForm.html">Add Sponsor</a>
+                        <a class="dropdown-item" href=".">Add Sponsor</a>
                         <a class="dropdown-item" href="teamForm.php">Add Team</a>
                     </div>
                 </li>
@@ -58,22 +59,45 @@ $conn->close();
     </nav>
 </header>
 <main class="container-md">
-    <?php
-    echo "<a href='editSponsor.php?SponsorID=" . $sponsorID . "'><button class='btn btn-primary'>Edit</button></a>";
-    echo "<h1 style='text-align: center'>" . $row['Name'] . "</h1>";
-    ?>
-    <div class="container-fluid">
-        <?php
-        echo "<img src='" . $row['Imagepath'] . "' class='img-fluid mx-auto d-block'>";
-        ?>
-    </div>
-    <div class="container-fluid mt-3 border-top">
-        <h2>Description</h2>
-        <?php
-        echo $row['SponsorDesc'];
-        ?>
-    </div>
+    <h1>Submit a Team Profile!</h1>
+    <form action="updateSponsor.php?SponsorID=<?php echo $sponsorID; ?>"
+          enctype="multipart/form-data"
+          method="post"
+          onsubmit="return validateForm(
+              document.getElementById('sponsorName'),
+              document.getElementById('sponsorDesc'),
+              document.getElementById('sponsorTags')
+              )
+    ">
+        <div class="form-group">
+            <label for="sponsorName">Sponsor Name</label>
+            <input type="text" class="form-control" id="sponsorName" name="sponsorName" value="<?php echo $row['Name']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="sponsorImage">Image</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="sponsorImage" name="sponsorImage">
+        </div>
+        <div class="form-group">
+            <label for="sponsorIcon">Icon</label>
+            <input type="file" onchange="ValidateSize(this)" class="form-control" id="sponsorIcon" name="sponsorIcon">
+        </div>
+        <div class="form-group">
+            <label for="sponsorDesc">Description</label>
+            <textarea class="form-control" id="sponsorDesc" rows="5" name="sponsorDesc" style="white-space: pre-line;">
+                <?php
+                $sponsorDesc = $row['SponsorDesc'];
+                $breaks = array("<br />","<br>","<br/>");
+                $sponsorDesc = str_ireplace($breaks, "\r\n", $sponsorDesc);
+                echo $sponsorDesc;
+                ?>
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="sponsorTags">Tags</label>
+            <input type="text" class="form-control" id="sponsorTags" name="sponsorTags" value="<?php echo $row['Tags']; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </main>
 </body>
 </html>
-
