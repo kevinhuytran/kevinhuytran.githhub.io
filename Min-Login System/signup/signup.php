@@ -24,8 +24,16 @@ echo "Username: ".$username. "<br>";
 echo "Password: ".$password1. "<br>";
 echo "Password-repeat: ".$password2. "<br>";
 
-$sql = "INSERT INTO Users(Username, Password) VALUES (\"$username\", \"$password\")";
 
+$result = $conn->query("SELECT Username FROM Users WHERE Username=$username")
+
+if ($result->num_rows == 0){
+    $sql = "INSERT INTO Users(Username, Password) VALUES (\"$username\", \"$password\");";
+
+    else{
+        echo "Username is already occupied! Try different username!"
+    }
+}
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully<br>";
