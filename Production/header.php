@@ -13,6 +13,16 @@ session_start();
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <?php
+                    if(!isset($_SESSION['username'])) {
+                        echo '<li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>';
+                    }
+                    else {
+                        echo '<li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>';
+                    }
                     if(isset($_SESSION['id'])) {
                         if ($_SESSION['id'] == 1) {
                             echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
